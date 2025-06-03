@@ -14,7 +14,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #111a25;
     --foreground: #ededed;
   }
 }
@@ -23,4 +23,144 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn {
+  background-color: transparent;
+  border: 1px solid transparent;
+  outline: none;
+  padding: 0.3rem 0.8rem;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  filter: brightness(1.1);
+}
+
+.btn:active {
+  filter: brightness(0.9);
+}
+
+.btn:disabled {
+  filter: brightness(0.8);
+}
+
+.btn-neon {
+  color: #ffffff;
+  background-color: #490f8bfd;
+}
+
+.text-box {
+  border: 1px solid #353535;
+  background-color: #3535357f;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 0.5rem;
+  border-radius: 20px;
+  transition: 0.3s;
+  align-items: end;
+  gap: 1em;
+
+  & textarea {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    resize: none;
+    outline: none;
+    height: auto;
+    max-height: 10em;
+  }
+}
+
+.text-box:focus-within {
+  border-color: #490f8bfd;
+}
+
+.theme-toogler {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  padding: 0.5em 1em;
+  background-color: #575757ad;
+  border-radius: 20px;
+  font-size: 0.8em;
+  color: #e2e2e2;
+  position: relative;
+  z-index: 0;
+  cursor: pointer;
+}
+
+.theme-toogler::after {
+  content: "";
+  width: 32px;
+  height: 2.1em;
+  background-color: #490f8bfd;
+  position: absolute;
+  border-radius: 20px;
+  transform: translateX(0);
+  left: 0.25em;
+  z-index: -1;
+  transition: 0.3s;
+}
+
+#theme-checkbox:checked~.theme-toogler::after {
+  transform: translateX(26px);
+}
+
+.response-loader {
+  color: #6b6b6b;
+  font-size: 0.9em;
+  animation: resloaderAnim 1s ease-in-out infinite forwards alternate;
+}
+
+@keyframes resloaderAnim {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0.5;
+  }
+}
+
+.spinner {
+  border: 5px solid transparent;
+  border-top: 5px solid #9d9d9dfd;
+  border-bottom: 5px solid #9d9d9dfd;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.floating-anim {
+  animation: floatingAnim 3s ease-in-out infinite;
+}
+
+@keyframes floatingAnim {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
