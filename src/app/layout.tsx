@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "AI Chatbot - Start asking questions",
   description: "A helpful chatbot that provides information and answers your questions.",
+  viewport: 'width=device-width, initial-scale=1, interactive-widget=resizes-content',
 };
 
 export default function RootLayout({
