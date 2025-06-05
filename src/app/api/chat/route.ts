@@ -116,7 +116,7 @@ history - ${JSON.stringify(messages)}
 
           const lines = chunk
             .split("\n")
-            .filter(line => line.trim().startsWith("data: "))
+            .filter(line => typeof line === "string" && line.trim().startsWith("data: "))
             .map(line => line.replace(/^data: /, "").trim());
 
           for (const line of lines) {
@@ -131,6 +131,7 @@ history - ${JSON.stringify(messages)}
                 controller.enqueue(new TextEncoder().encode(content));
               }
             } catch (err) {
+              console.error("Failed to parse JSON from line:", line);
               console.error("JSON parse error:", err);
             }
           }

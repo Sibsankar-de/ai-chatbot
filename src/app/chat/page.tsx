@@ -123,6 +123,10 @@ const ChatPage = () => {
         }
     };
 
+    useEffect(() => {
+        console.log(messages);
+    }, [messages])
+
     return (
         <div>
             <Navbar />
