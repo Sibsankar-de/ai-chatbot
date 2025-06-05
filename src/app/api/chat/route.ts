@@ -114,9 +114,16 @@ history - ${JSON.stringify(messages)}
 
           const chunk = decoder.decode(value, { stream: true });
 
-          const lines = chunk
+          const lines = (chunk || "")
+            .toString()
             .split("\n")
-            .filter(line => typeof line === "string" && line.trim().startsWith("data: "))
+            .filter(line => {
+              try {
+                return line?.trim?.().startsWith("data: ");
+              } catch {
+                return false;
+              }
+            })
             .map(line => line.replace(/^data: /, "").trim());
 
           for (const line of lines) {
