@@ -8,6 +8,7 @@ import { Loader } from '../components/Loader';
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm';
 import { Footer } from '../components/Footer';
+import Head from 'next/head';
 
 
 type Message = {
@@ -128,30 +129,38 @@ const ChatPage = () => {
     }, [messages])
 
     return (
-        <div>
-            <Navbar />
-            <div className='flex justify-center m-3'>
-                <div className='grid grid-rows-[1fr_auto] h-[calc(100vh-115px)] md:w-[70vw] w-[95vw]'>
-                    <div className='chat-list-box overflow-y-auto p-4' ref={boxRef} onScroll={handleScroll}>
-                        <ul className='chat-list'>
-                            {messages.length === 0 ? <StarterComponent onQuery={async (q) => await getResponse(q)} />
-                                :
-                                messages.map((message, index) => {
-                                    return <ChatBubble key={index} message={message} isUser={message.role === "user"} />
-                                })}
-                            {isLoading && <div className='flex items-center gap-3 mb-10'>
-                                <Loader size={20} />
-                                <div className='response-loader'>Generating responses...</div>
-                            </div>}
-                        </ul>
-                    </div>
-                    <div className='flex justify-center'>
-                        <TextBox onChange={(e) => setInput(e as string)} value={input} onSend={handleSubmit} isBtnActive={!isGenerating} />
+        <>
+            <Head>
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1, interactive-widget=resizes-content"
+                />
+            </Head>
+            <div>
+                <Navbar />
+                <div className='flex justify-center m-3'>
+                    <div className='grid grid-rows-[1fr_auto] h-[calc(100svh-115px)] md:w-[70vw] w-[95vw]'>
+                        <div className='chat-list-box overflow-y-auto p-4' ref={boxRef} onScroll={handleScroll}>
+                            <ul className='chat-list'>
+                                {messages.length === 0 ? <StarterComponent onQuery={async (q) => await getResponse(q)} />
+                                    :
+                                    messages.map((message, index) => {
+                                        return <ChatBubble key={index} message={message} isUser={message.role === "user"} />
+                                    })}
+                                {isLoading && <div className='flex items-center gap-3 mb-10'>
+                                    <Loader size={20} />
+                                    <div className='response-loader'>Generating responses...</div>
+                                </div>}
+                            </ul>
+                        </div>
+                        <div className='flex justify-center'>
+                            <TextBox onChange={(e) => setInput(e as string)} value={input} onSend={handleSubmit} isBtnActive={!isGenerating} />
+                        </div>
                     </div>
                 </div>
+                <Footer />
             </div>
-            <Footer />
-        </div>
+        </>
     )
 }
 

@@ -26,7 +26,7 @@ export const TextBox = ({ onChange, value, onSend, isBtnActive = true }: { onCha
     }
 
     return (
-        <div className='text-box w-[80%]'>
+        <div className='text-box md:w-[80%] w-[90%]'>
             <div><textarea name="" id="" className='pl-2' placeholder='Write your queries here' ref={textBoxRef} onChange={handleInputChange} value={value} onKeyDown={handleSendOnEnter} ></textarea></div>
             <div><button className="btn btn-neon w-12 h-12 !rounded-full !p-0" onClick={(e) => onSend(e)} disabled={!isBtnActive}>{isBtnActive ? <span className='!text-[1.7em] font-bold'><i className="bi bi-arrow-up-short font-bold"></i></span> : <Loader size={30} />}</button></div>
         </div>
